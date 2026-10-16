@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "repository": "ActorF/Elysia_Singing",
+  "release_tag": "v0.1.0",
+  "bundles": {
+    "windows": {
+      "archive": "windows-runtime.tar.gz",
+      "size": 2775630613,
+      "sha256": "c41b611cef61787206d823c796754785d2d5d43548654472714afdc3bb32467d",
+      "parts": [
+        {
+          "name": "windows-runtime.tar.gz.part01",
+          "size": 1073741824,
+          "sha256": "9355d476f9418830fde7bd19280d7559bd00a29fb1856d680689fbd876d3977b"
+        },
+        {
+          "name": "windows-runtime.tar.gz.part02",
+          "size": 1073741824,
+          "sha256": "63163914e28f3e0d7c2e483108b7afd6891f381b70cb7fd01152d7e51abe2a45"
+        },
+        {
+          "name": "windows-runtime.tar.gz.part03",
+          "size": 628146965,
+          "sha256": "b58c179bafc322d25eced0f16bc483b8eb0e87f93e93fb9c8e9f12d572d3b58f"
+        }
+      ]
+    },
+    "linux": {
+      "archive": "linux-runtime.tar.gz",
+      "size": 6222279860,
+      "sha256": "aa516755624fde0f79732abb31853a0b4d3a3fd88cfb36be491a63b1f59b2812",
+      "parts": [
+        {
+          "name": "linux-runtime.tar.gz.part01",
+          "size": 1073741824,
+          "sha256": "19f94dd390deab4d7bce26d32fc8c67e374133c021184cb4bb1e3d512b7887c2"
+        },
+        {
+          "name": "linux-runtime.tar.gz.part02",
+          "size": 1073741824,
+          "sha256": "d055640b90bb4fa2bebdb7dca296fd12fe659ae7b469dced624f429002843aa2"
+        },
+        {
+          "name": "linux-runtime.tar.gz.part03",
+          "size": 1073741824,
+          "sha256": "c311fdecd5e9fb1e89cdc26f1abb78955939ddfe7c12a5462f49555e71a55604"
+        },
+        {
+          "name": "linux-runtime.tar.gz.part04",
+          "size": 1073741824,
+          "sha256": "0ba64f96dc31969de5e2729d8464d2adf53397b8e50c05fc7e77fbb89b656519"
+        },
+        {
+          "name": "linux-runtime.tar.gz.part05",
+          "size": 1073741824,
+          "sha256": "d3461ddafea53bc08c6f13e31ec12edd3c287711e6ac22677c679e6575a18375"
+        },
+        {
+          "name": "linux-runtime.tar.gz.part06",
+          "size": 853570740,
+          "sha256": "f17f626b94fe24d8a2d8f3339a3d71c18d0a880d9fe31e35e801b0b4d5cf1008"
+        }
+      ]
+    }
+  }
+}

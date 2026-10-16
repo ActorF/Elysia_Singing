@@ -14,7 +14,7 @@ SongKey (-12 to 12): 0
 Shift accompaniment with vocal (yes/no): yes
 ```
 
-**系统要求：Windows x64、支持 CUDA 的 NVIDIA 显卡及驱动、WSL2。** 首次部署需要联网和足够磁盘空间保存压缩包及展开后的环境。模型为数 GB，首次下载和部署需要时间。没有 WSL2 时，启动器会显示安装命令；以管理员身份执行 `wsl --install --no-distribution`，按 Windows 提示完成安装/重启后重新打开 `start.cmd`。本程序不会安装 Linux 显卡驱动或修改用户已有发行版。
+**系统要求：Windows x64、支持 CUDA 的 NVIDIA 显卡及驱动、WSL2。** 首次部署下载约 9 GB，建议项目所在磁盘至少有 40 GB 可用空间，用于压缩包、暂存文件和展开后的环境。首次下载和部署需要时间。没有 WSL2 时，启动器会显示安装命令；以管理员身份执行 `wsl --install --no-distribution`，按 Windows 提示完成安装/重启后重新打开 `start.cmd`。本程序不会安装 Linux 显卡驱动或修改用户已有发行版。
 
 程序创建独立的 `Elysia-Singing-<项目编号>` WSL 发行版，存储于本项目的 `models/wsl`。不使用电脑默认的 Linux 发行版，也不需要用户手动配置 Python、pip、模型目录或参考音频。首次安装后请保持项目目录位置不变。
 

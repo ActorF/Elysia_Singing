@@ -46,7 +46,9 @@ class BootstrapTests(unittest.TestCase):
         """Allocate a fresh fake project for every bootstrap operation."""
         temporary = tempfile.TemporaryDirectory(prefix="elysia-bootstrap-")
         self.addCleanup(temporary.cleanup)
-        self.root = Path(temporary.name)
+        # Hosted Windows runners can expose TEMP through an 8.3 user-directory
+        # alias. Match bootstrap's canonical root before comparing descendants.
+        self.root = Path(temporary.name).resolve()
         self.parts = self.root / "parts"
         self.parts.mkdir()
 

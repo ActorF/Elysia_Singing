@@ -17,4 +17,6 @@ The Linux bundle is built from a clean Ubuntu Base image, rather than exported f
 
 Exact model lengths and identities remain enforced in `scripts/song_svc_assets.py` and the native audio worker. `release-manifest.json` identifies every compressed runtime part by byte length and SHA-256. Existing upstream license and notice files are preserved with the bundled software; this repository does not relicense them or claim ownership of third-party models, recordings, or characters.
 
+The Release also includes `windows-runtime.manifest.json` with package inventories and `ffmpeg-corresponding-sources.zip` with the exact upstream FFmpeg source snapshots, COPYING files and recorded binary build configurations. The sidecar explains the limits of the available original vendor build materials.
+
 Elysia is associated with HoYoverse / miHoYo. This project is unofficial. The supplied reference is included at the project owner's request; that inclusion is not a grant of third-party character, recording, performance, or commercial-use rights.
