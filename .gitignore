@@ -1,0 +1,26 @@
+# Private runtime, source audio, working files and generated songs stay local.
+/models/
+/workspace/
+/input/
+/output/
+/release-build/
+/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+*.log
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.opus
+*.pt
+*.pth
+*.npy
+*.safetensors
+*.exe
+*.dll
+*.pyd
