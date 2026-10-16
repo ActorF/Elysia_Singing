@@ -1,6 +1,6 @@
 """Authenticate offline Elysia singing-conversion assets and closed requests.
 
-The model weights and Elysia singing reference live in the private WSL runtime.
+The bundled model weights and Elysia reference live in the dedicated WSL runtime.
 The CMD application selects an integer key only; it cannot supply alternate
 references, model paths, arbitrary inference settings, or repair instructions."""
 

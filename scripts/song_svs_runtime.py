@@ -1,8 +1,8 @@
 """Run private full-song Elysia source voice conversion inside WSL.
 
 A managed UUID job supplies only a target vocal and the fixed Elysia request.
-Model, interpreter, and vendor-source paths resolve inside the user's existing
-private SoulX runtime. The local project's scripts are used for every child
+Model, interpreter, and vendor-source paths resolve inside the project's bundled
+SoulX distribution. The local project's scripts are used for every child
 stage; no Elysia_AI application modules or lyrics pipeline are required.
 
 Inference owns a leased Linux session. Cancellation and recovery terminate
@@ -12,7 +12,7 @@ progress; raw vendor diagnostics are withheld from that protocol. The vocal
 is returned to the native worker for full-song mixing and workspace export.
 
 The historical runtime name and private integrity/prompt helpers are retained
-to preserve existing deployment contracts. Lyrics entry points are removed;
+to preserve the reviewed inference contracts. Lyrics entry points are removed;
 source conversion has a 55-minute inference limit within a 90-minute budget."""
 
 from __future__ import annotations

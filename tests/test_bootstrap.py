@@ -155,6 +155,25 @@ exit 0
         """A matching distro name cannot take ownership of another folder's data."""
         self._run("function _Distribution-Record { [pscustomobject]@{Version=2;BasePath='C:\\another-project'} }; try { _Verify-Distribution 'Elysia-Singing-test' (Join-Path $ProjectRoot 'models\\wsl') 'v0.1.0'; throw 'accepted foreign distribution' } catch { if ($_.Exception.Message -notlike '*already registered outside*') { throw } }")
 
+    def test_distribution_lookup_ignores_nondistribution_registry_entries(self) -> None:
+        """Auxiliary or stale Lxss keys must not prevent discovering a real distro."""
+        self._run(r"""
+function Test-Path { param($LiteralPath) return $true }
+function Get-ChildItem { param($LiteralPath)
+    @([pscustomobject]@{PSPath='stale'}, [pscustomobject]@{PSPath='other'}, [pscustomobject]@{PSPath='owned'})
+}
+function Get-ItemProperty { param($LiteralPath)
+    switch ($LiteralPath) {
+        'stale' { [pscustomobject]@{BasePath='C:\unused'} }
+        'other' { [pscustomobject]@{DistributionName='Ubuntu';Version=2;BasePath='C:\ubuntu'} }
+        'owned' { [pscustomobject]@{DistributionName='Elysia-Singing-test';Version=2;BasePath='C:\owned'} }
+    }
+}
+$record = _Distribution-Record 'Elysia-Singing-test'
+if ($record.BasePath -ne 'C:\owned') { throw 'Wrong distribution selected' }
+if ($null -ne (_Distribution-Record 'Elysia-Singing-missing')) { throw 'Unexpected distribution selected' }
+""")
+
     def test_setup_obeys_the_active_python_console_lock(self) -> None:
         """PowerShell setup and the Python converter share the same OS byte lock."""
         import msvcrt

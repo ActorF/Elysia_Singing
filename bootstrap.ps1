@@ -223,7 +223,11 @@ function _Distribution-Record([string]$Name) {
     if (-not (Test-Path -LiteralPath $registryRoot)) { return $null }
     $matches = @(Get-ChildItem -LiteralPath $registryRoot | ForEach-Object {
         $record = Get-ItemProperty -LiteralPath $_.PSPath
-        if ($record.DistributionName -ceq $Name) { $record }
+        # WSL leaves auxiliary or incomplete subkeys under Lxss. Inspect the
+        # property collection before reading a name under StrictMode.
+        $nameProperty = $record.PSObject.Properties['DistributionName']
+        if ($null -ne $nameProperty -and $nameProperty.Value -is [string] -and
+            $nameProperty.Value -ceq $Name) { $record }
     })
     if ($matches.Count -gt 1) { throw 'Multiple WSL registrations claim this project name.' }
     if ($matches.Count -eq 1) { return $matches[0] }
@@ -233,10 +237,16 @@ function _Distribution-Record([string]$Name) {
 function _Verify-Distribution([string]$Name, [string]$InstallDirectory, [string]$Tag) {
     $record = _Distribution-Record $Name
     if ($null -eq $record) { throw "The dedicated WSL distribution is missing: $Name" }
-    $registeredPath = [string]$record.BasePath
+    $basePathProperty = $record.PSObject.Properties['BasePath']
+    $versionProperty = $record.PSObject.Properties['Version']
+    if ($null -eq $basePathProperty -or $null -eq $versionProperty -or
+        $basePathProperty.Value -isnot [string] -or [string]::IsNullOrWhiteSpace($basePathProperty.Value)) {
+        throw "WSL registration $Name is incomplete. It will not be changed."
+    }
+    $registeredPath = [string]$basePathProperty.Value
     if ($registeredPath.StartsWith('\\?\')) { $registeredPath = $registeredPath.Substring(4) }
     $registeredPath = [IO.Path]::GetFullPath($registeredPath).TrimEnd('\')
-    if ($record.Version -ne 2 -or -not $registeredPath.Equals($InstallDirectory, [StringComparison]::OrdinalIgnoreCase)) {
+    if ($versionProperty.Value -ne 2 -or -not $registeredPath.Equals($InstallDirectory, [StringComparison]::OrdinalIgnoreCase)) {
         throw "WSL name $Name is already registered outside this project's WSL2 runtime. It will not be changed."
     }
     $markerCheck = "import pathlib,sys; p=pathlib.Path('/etc/elysia-singing-release'); assert p.is_file() and p.read_text().strip()==sys.argv[1], 'Release identity mismatch'"
